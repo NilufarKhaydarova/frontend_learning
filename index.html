@@ -1,3 +1,74 @@
 <!DOCTYPE html>
 
-<h1>"Hello World!"</h1>
+<html>
+    <head>
+        <title> Index </title>
+        <style>
+            .box{
+                background-color: purple;
+                height: 200px;
+                width: 200px;
+            }
+
+            [v-cloak] {
+                display: none;
+            }
+
+            input{
+                margin: 10 px;
+                display: block;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="app" v-cloak>
+            <login-form /> 
+
+            <hr />
+            <button @click.right="toggleBox"> Toggle Box </button>
+            <div v-if="isVisible" class="box"></div>
+        </div>
+        
+        <script src="https://unpkg.com/vue@next"></script>
+        <script>
+            let app = Vue.createApp({
+                data: function() {
+                    return {
+                        greeting: 'Hello Vue 3!',
+                        isVisible: false
+                    }
+                },
+                methods: {
+                    toggleBox() {
+                        this.isVisible = !this.isVisible
+                    },
+                    greet(greeting) {
+                        console.log(greeting)
+                    }
+                }
+            })
+
+            app.component('login-form', {
+                template: `
+                <div>
+                    <h1> {{ title }} </h1>
+                    <input type="email" />
+                    <input type="password" />
+                </div>
+                `,
+                data() {
+                    return {    
+                        title: 'Login Form'
+                    }
+                }
+            })
+
+
+
+
+
+            app.mount("#app")
+        </script>
+        </body>
+</html>
